@@ -30,14 +30,14 @@ a :active{
   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
   color: white;
   font-weight: bold;
-  border: 3px solid #f1f1f1;
+  border: 1px solid #f1f1f1;
   position: absolute;
-  top: 50%;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  width: 80%;
-  padding: 20px;
+  width: 40%;
+  padding: 5px;
   text-align: center;
 }
 
@@ -129,7 +129,7 @@ b,strong {font-weight:700;}
   max-width:100%;
   width:auto;
   margin-left: 40px;
-  box-shadow:2px 1px 22px  #888888;
+  box-shadow: 0px -2px 11px 8px #d7ebf7;
   border-radius: 50%;
   margin-top: -5px;
 }

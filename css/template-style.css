@@ -22,8 +22,7 @@ body {
 
 
 .image-details{
-  padding: 10px;
-  margin-left:8px;
+  padding: 2em;
   /* border:2px solid #fff; */
   box-shadow: 0 4px 8px 10px rgba(118, 118, 118, 0.2);
 }
@@ -58,7 +57,6 @@ body {
 
 
 .image-section-pera2{
-  margin-top: -12px;
   font-size: 0.9em;
   /* border-bottom: 2px solid rgb(239, 239, 239); */
   align-items: justify;
@@ -99,6 +97,12 @@ body {
 .firstdiv{
   border: 1px solid #efe9e9;
   box-shadow: 5px 3px 3px #c9c5c5;
+}
+.tx-red{
+  color:#f32727;
+}
+.tx-green{
+  color:#03ac03;
 }
 
 .user{
@@ -870,8 +874,16 @@ aside.aside-left {
 .section  { 
   /* padding: 1rem 1.25rem; */
   width:100%;
+
+}
+.inlineBox{
+  display: inline-block;
 }
 
+.bg-gray
+{
+ background-color:#f4f4f4;
+}
 .item{
   /* border:2px solid red; */
    width: 100%;
