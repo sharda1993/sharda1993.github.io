@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <link rel="stylesheet" href="style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Our Strategies</title>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<main>
+  <section id="our-strategies" class="our-strategies">
+    <h2 class="section-title">Our Strategies</h2>
+    <div class="strategy-cards-container">
+      <div class="strategy-card">
+        <img src="https://i.ibb.co/L8bVf2x/community-centric.jpg" alt="Community Centric Development" loading="lazy"/>
+        <div class="card-content">
+          <h3>Land Rights</h3>
+          <p>VMKS advocates for formal land titles for the tribal communities who have historically lackedownership records, leading to land usurpation by outsiders. It fights against the declaration of tribalcommunities as forest encroachers and aims to secure sufficient land for agriculture and fodder production,with a particular focus on women's land rights.</p>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <img src="https://i.ibb.co/C03D1n1/community-institution.jpg" alt="Development of Community Institutions/Group" loading="lazy"/>
+        <div class="card-content">
+          <h3>Agriculture and Livelihood Issues</h3>
+          <p>VMKS works towards addressing the challenges of limited access tominor forest produce, low agricultural yields due to topography and rainfall constraints, and restricted grazingopportunities for animals. It aims to improve livelihood options beyond low-productivity agriculture and rurallabor by exploring non-farm rural employment opportunities.</p>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <img src="https://i.ibb.co/nRL3691/capacity-building.jpg" alt="Capacity Building and Training" loading="lazy"/>
+        <div class="card-content">
+          <h3>Migration Problem</h3>
+          <p>The organization recognizes the negative impact of short-term migration on educationand advocates for sustainable livelihood options within the Vagad region. VMKS aims to address the issuesfaced by tribal families working in low-paying occupations outside their communities, promoting long-term security and improved prospects for their children's education.</p>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <img src="https://i.ibb.co/hK2xK8N/awareness-creation.jpg" alt="Awareness Creation" loading="lazy"/>
+        <div class="card-content">
+          <h3>Conservation and Promotion of Natural Resources</h3>
+          <p>VMKS strives to secure individual and community forest rights allocations to protect forests and ensure that local communities benefit from their resources sustainably.It opposes bureaucratic hurdles in obtaining forest entitlements and works towards restoring the sense of ownership and belonging among young tribal's.</p>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <img src="https://i.ibb.co/q5kY1fD/data-driven-decision.jpg" alt="Data Driven Decision Making" loading="lazy"/>
+        <div class="card-content">
+          <h3>Timely Access to Government Schemes</h3>
+          <p>VMKS advocates for the full and timely implementation ofgovernment schemes, including ration, pension, housing, toilets, and the Mahatma Gandhi National RuralEmployment Guarantee Act (MGNREGA), within the predominantly tribal Dungarpur district</p>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <img src="https://i.ibb.co/Wc6Y23q/focus-on-sustainability.jpg" alt="Focus on Sustainability" loading="lazy"/>
+        <div class="card-content">
+          <h3>Leadership Skills and Cultural Change</h3>
+          <p>Recognizing the lack of awareness and limited local leadership in tribal society, VMKS aims to develop leadership skills and promote cultural preservation. It emphasizes theimportance of community engagement, advocating for the tribal community's issues at various levels, including panchayat's, blocks, and district administrations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+  'use strict';
+
+  async function loadHTML(id, file) {
+    try {
+      const response = await fetch(file);
+      if (!response.ok) {
+        throw new Error(`Failed to load ${file}: ${response.statusText}`);
+      }
+      const text = await response.text();
+      document.getElementById(id).innerHTML = text;
+    } catch (error) {
+      console.error(`Error loading ${file}:`, error);
+      const placeholder = document.getElementById(id);
+      if (placeholder) {
+        placeholder.innerHTML = `<div style="padding: 20px; background: #ffebee; color: #c62828; border: 2px solid #c62828; margin: 20px; border-radius: 5px;">
+          <strong>⚠️ Warning:</strong> Header/Footer could not be loaded. This happens when opening the file directly (file:// protocol). 
+          <br><br>Please use a web server instead:
+          <br><code style="background: #fff; padding: 5px; border-radius: 3px; display: inline-block; margin-top: 10px;">python -m http.server 8000</code>
+          <br>Then open: <code style="background: #fff; padding: 5px; border-radius: 3px; display: inline-block; margin-top: 5px;">http://localhost:8000/our-strategies.html</code>
+        </div>`;
+      }
+    }
+  }
+
+  async function initializePageScripts() {
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const mainNav = document.getElementById('mainNav');
+    const header = document.querySelector('header');
+
+    if (hamburgerIcon && mainNav && header) {
+      hamburgerIcon.addEventListener('click', () => {
+        mainNav.classList.toggle('open');
+        hamburgerIcon.classList.toggle('open');
+        const isExpanded = hamburgerIcon.classList.contains('open');
+        hamburgerIcon.setAttribute('aria-expanded', isExpanded);
+      });
+
+      const headerHeight = header.offsetHeight;
+
+      mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (this.hostname === window.location.hostname && this.pathname === window.location.pathname && this.hash) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+              const offsetTop = targetElement.offsetTop - headerHeight;
+              window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+              });
+            }
+          }
+          if (mainNav.classList.contains('open')) {
+            mainNav.classList.remove('open');
+            hamburgerIcon.classList.remove('open');
+          }
+        });
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadHTML('header-placeholder', 'header.html');
+    await loadHTML('footer-placeholder', 'footer.html');
+    initializePageScripts();
+  });
+</script>
+</body>
+</html>
