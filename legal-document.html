@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <link rel="stylesheet" href="style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Legal Documents - VMKS NGO</title>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<main>
+  <section id="legal-documents" class="legal">
+    
+  </section>
+  <section id="document-display" class="document-display">
+    <h2>Legal Documents</h2>
+    <div class="document-cards">
+      <a href="javascript:void(0)" class="document-card" data-image-src="./images/pan_card.jpg">
+        <img src="./images/pan_card.jpg" alt="Pan Card Document" loading="lazy"/>
+        <h3>Pan Card</h3>
+      </a>
+      <a href="./images/12a_certificate.pdf" target="_blank" class="document-card">
+        <img src="./images/12a_certificate.jpg" alt="12 A Certificate Document" loading="lazy"/>
+        <h3>12 A Certificate</h3>
+      </a>
+      <a href="./images/80g_certificate.pdf" target="_blank" class="document-card">
+        <img src="./images/80g_certificate.jpg" alt="80 G Certificate Document" loading="lazy"/>
+        <h3>80 G Certificate</h3>
+      </a>
+      <a href="javascript:void(0)" class="document-card" data-image-src="./images/registration_certificate.jpg">
+        <img src="./images/registration_certificate.jpg" alt="Registration Certificate Document" loading="lazy"/>
+        <h3>Registration Certificate</h3>
+      </a>
+    </div>
+    <h2>Annual Report</h2>
+    <div class="document-cards">
+        <a href="./images/annual_report_2024.pdf" target="_blank" class="document-card">
+          <img src="./images/annual_report_2024.jpg" alt="Annual Report 2024" loading="lazy"/>
+          <h3>Annual Report 2022-23</h3>
+        </a>
+        <a href="./images/annual_report_2024.pdf" target="_blank" class="document-card">
+            <img src="./images/annual_report_2024.jpg" alt="Annual Report 2024" loading="lazy"/>
+            <h3>Annual Report 2023-24</h3>
+        </a>
+        <a href="./images/annual_report_2024.pdf" target="_blank" class="document-card">
+            <img src="./images/annual_report_2024.jpg" alt="Annual Report 2024" loading="lazy"/>
+            <h3>Annual Report 2024-25</h3>
+        </a>
+    </div>
+  </section>
+</main>
+
+<!-- The Modal -->
+<div id="imageModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <img id="fullImage" src="" alt="Full size document"/>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script>
+  'use strict';
+
+  async function loadHTML(id, file) {
+    try {
+      const response = await fetch(file);
+      if (!response.ok) {
+        throw new Error(`Failed to load ${file}: ${response.statusText}`);
+      }
+      const text = await response.text();
+      document.getElementById(id).innerHTML = text;
+    } catch (error) {
+      console.error(`Error loading ${file}:`, error);
+      const placeholder = document.getElementById(id);
+      if (placeholder) {
+        placeholder.innerHTML = `<div style="padding: 20px; background: #ffebee; color: #c62828; border: 2px solid #c62828; margin: 20px; border-radius: 5px;">
+          <strong>⚠️ Warning:</strong> Header/Footer could not be loaded. This happens when opening the file directly (file:// protocol). 
+          <br><br>Please use a web server instead:
+          <br><code style="background: #fff; padding: 5px; border-radius: 3px; display: inline-block; margin-top: 10px;">python -m http.server 8000</code>
+          <br>Then open: <code style="background: #fff; padding: 5px; border-radius: 3px; display: inline-block; margin-top: 5px;">http://localhost:8000/${file === 'header.html' ? 'legal-document.html' : 'legal-document.html'}</code>
+        </div>`;
+      }
+    }
+  }
+
+  async function initializePageScripts() {
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const mainNav = document.getElementById('mainNav');
+    const header = document.querySelector('header');
+
+    if (hamburgerIcon && mainNav && header) {
+      hamburgerIcon.addEventListener('click', () => {
+        mainNav.classList.toggle('open');
+        hamburgerIcon.classList.toggle('open');
+        const isExpanded = hamburgerIcon.classList.contains('open');
+        hamburgerIcon.setAttribute('aria-expanded', isExpanded);
+      });
+
+      const headerHeight = header.offsetHeight;
+
+      mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (this.hostname === window.location.hostname && this.pathname === window.location.pathname && this.hash) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+              const offsetTop = targetElement.offsetTop - headerHeight;
+              window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+              });
+            }
+          } else {
+            if (mainNav.classList.contains('open')) {
+              mainNav.classList.remove('open');
+              hamburgerIcon.classList.remove('open');
+            }
+          }
+        });
+      });
+    }
+
+    // Image Modal functionality
+    const imageModal = document.getElementById('imageModal');
+    const fullImage = document.getElementById('fullImage');
+    const closeButton = document.querySelector('.close-button');
+    const documentCards = document.querySelectorAll('.document-card');
+
+    documentCards.forEach(card => {
+      card.addEventListener('click', function(e) {
+        const imageSrc = this.getAttribute('data-image-src');
+        if (imageSrc) { // Only open modal for image cards
+          e.preventDefault(); // Prevent default link behavior
+          fullImage.src = imageSrc;
+          imageModal.style.display = 'block';
+        }
+      });
+    });
+
+    closeButton.addEventListener('click', () => {
+      imageModal.style.display = 'none';
+      fullImage.src = ''; // Clear the image source
+    });
+
+    imageModal.addEventListener('click', (e) => {
+      if (e.target === imageModal) {
+        imageModal.style.display = 'none';
+        fullImage.src = '';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadHTML('header-placeholder', 'header.html');
+    await loadHTML('footer-placeholder', 'footer.html');
+    initializePageScripts();
+  });
+</script>
+</body>
+</html>
