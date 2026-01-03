@@ -1,0 +1,712 @@
+html {
+      scroll-behavior: smooth;
+      box-sizing: border-box;
+    }
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif; /* Changed font to Roboto */
+      background-color: #f9f9f9;
+      line-height: 1.6;
+      overflow-x: hidden; /* Temporarily hide horizontal scrollbar */
+    }
+       header {
+      background: #399b8c;
+      color: #fff;
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+	  position: fixed; /* Changed to fixed */
+      top: 0;
+      width: 100%; /* Ensure it spans full width */
+      box-sizing: border-box; /* Include padding in width calculation */
+
+    }
+    .logo {
+        position: absolute; /* Absolute positioning */
+        left: 40px; /* Aligned to the left padding of the header */
+        top: 49%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust for perfect vertical centering */
+        height: 80px; /* Adjust as needed */
+        z-index: 1001; /* Ensure logo is above other elements if any overlap */
+		/* Added effects for glossy look and enhancement */
+        filter: brightness(1.1); /* Slightly brighter */
+        box-shadow: 1px 1px 50px rgba(255, 255, 255, 0.5); /* Subtle white glow */
+		border-radius: 50%; /* Slightly rounded corners for a softer look */
+		overflow: hidden;
+		/* background:white; */
+    }
+    nav {
+        margin-left: auto; /* Push nav to the right */
+    }
+    nav a {
+      margin-left: 35px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+	   position: relative; /* Needed for pseudo-element positioning */
+      padding-bottom: 5px; /* Space for the underline */
+    }
+	
+	nav a::after { /* Pseudo-element for the underline */
+      content: '';
+      position: absolute;
+      width: 0; /* Starts with no width */
+      height: 2px; /* Thickness of the underline */
+      background: #ffd700; /* Color of the underline */
+      left: 0;
+      bottom: 0; /* Position at the bottom of the link */
+      transition: width 0.3s ease-out; /* Animation for width change */
+    }
+    nav a:hover::after { /* On hover, expand the underline */
+      width: 100%;
+    }
+    nav a:hover {
+      color: #ffd700;
+    }
+	
+	 /* Hamburger Menu Styles */
+    .hamburger {
+        display: none; /* Hidden by default on desktop */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        cursor: pointer;
+        z-index: 1002; /* Ensure it's above other header content */
+        margin-left: auto; /* Push to the right when visible */
+    }
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #fff;
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+    /* Hamburger to X animation */
+    .hamburger.open span:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+    .hamburger.open span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.open span:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+	section h2 {
+	margin :0px
+	}
+    /* .hero {
+      background: url('https://sing-chandan.github.io/sharda1993.github.io/img/04.jpg') no-repeat top center/cover;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .hero h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+    .hero p {
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    } */
+    .our-strategies {
+      padding: 80px 20px;
+      background-color: #f9f9f9;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .our-strategies .section-title {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      color: #2a2a2a;
+      position: relative;
+      display: inline-block;
+    }
+    .our-strategies .section-title::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: #ffd700;
+      left: 0;
+      bottom: 0;
+      transition: width 0.4s ease-out;
+    }
+    
+    .strategy-cards-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Three columns for strategy cards */
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .strategy-card {
+      background-color: #399b8c;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      color: white;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+    }
+    .strategy-card img {
+      width: 100%;
+      height: 200px; /* Fixed height for images */
+      object-fit: cover;
+    }
+    
+    .strategy-card .card-content {
+      padding: 20px;
+      flex-grow: 1; /* Allows content to take up remaining space */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .strategy-card h3 {
+      font-size: 1.4em;
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #ffd700; /* Gold color for titles */
+      text-transform: uppercase;
+    }
+    .strategy-card p {
+      font-size: 1em;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+    
+    /* Carousel Styles */
+    .carousel-section {
+      position: relative;
+      width: 100%;
+      /* max-width: 100%; Adjust as needed */
+      margin: 60px 0; 
+      overflow: hidden;
+    }
+
+    .carousel-container {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 500px; /* Decreased height */
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-prev, .carousel-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 100;
+      font-size: 1.5em;
+    }
+
+    .carousel-prev {
+      left: 0;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .carousel-next {
+      right: 10px; /* Adjusted to bring inside screen */
+      border-radius: 5px 0 0 5px;
+    }
+
+    .carousel-dots {
+      text-align: center;
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+    }
+
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: #717171;
+    }
+
+    .about, .recent, .report, .contact, .legal {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 93%;
+      /*margin: 90px 10px 40px 40px; */
+      margin: 20px 10px 40px 40px;;
+    }
+    .legal{
+      margin-top: 90px !important;
+    }
+	 /* Styles for section headers */
+    section h2 {
+      position: relative;
+      display: inline-block;
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #2a2a2a;
+    }
+    section h2::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: #ffd700;
+      left: 0;
+      bottom: 0;
+      transition: width 0.4s ease-out;
+    }
+    
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    /* Styles for recent activities zigzag layout */
+
+    .recent-activity-item {
+
+      display: flex;
+
+      align-items: center;
+
+      margin-bottom: 40px;
+
+      gap: 30px;
+
+    }
+
+    .recent-activity-item img {
+
+      width: 40%;
+
+      height: 250px;
+
+      object-fit: cover;
+
+      border-radius: 8px;
+
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    }
+    .recent-activity-item div {
+      flex: 1; /* Text content takes remaining width */
+    }
+    .recent-activity-item h3 {
+      margin-top: 0;
+      color: #2a2a2a;
+      font-size: 1.5em;
+    }
+    /* Zigzag pattern: image on right for odd items (2nd, 4th, etc.) */
+    .recent-activity-item:nth-child(odd) {
+      flex-direction: row-reverse; /* Image on right, text on left */
+    }
+
+    /* Vision Mission Values Styles */
+    .vision-mission-values {
+      padding: 60px 20px;
+      background-color: #f9f9f9;
+      margin-top: 50px;
+    }
+    .vmv-cards-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .vmv-card {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .vmv-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .vmv-icon {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    .vmv-icon.vision-icon::before {
+      content: '👁️';
+    }
+    .vmv-icon.mission-icon::before {
+      content: '🎯';
+    }
+    .vmv-icon.goal-icon::before {
+      content: '🏆';
+    }
+    .vmv-card h3 {
+      color: #2a2a2a;
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+    .vmv-card p {
+      color: #555;
+      line-height: 1.8;
+      margin: 0;
+    }
+    .vmv-card ul {
+      text-align: left;
+      color: #555;
+      line-height: 1.8;
+      margin: 0;
+      padding-left: 20px;
+    }
+    .vmv-card ul li {
+      margin-bottom: 10px;
+    }
+
+    /* Media query for responsiveness */
+    @media (max-width: 768px) {
+       header {
+        flex-direction: row; /* Keep logo and hamburger side-by-side */
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px; /* Adjusted padding */
+      }
+	  .about, .recent, .report, .contact {
+
+      max-width: 100%;}
+      .logo {
+        position: static; /* Remove absolute positioning */
+        height: 80px; /* Keep same height as desktop view */
+        margin-bottom: 0;
+        transform: none;
+      }
+      .hamburger {
+        display: flex; /* Show hamburger icon */
+      }
+      nav {
+        /* Mobile menu hidden by default */
+        display: flex; /* Keep it as flex container for children */
+        flex-direction: column;
+        position: absolute;
+        top: 80px; /* Position below the header */
+        left: 0;
+        width: 100%;
+        background: #2a2a2a; /* Same as header background */
+        max-height: 0; /* Hidden state */
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        padding: 0; /* Reset padding */
+      }
+      nav.open { /* When menu is open */
+        max-height: 300px; /* Adjust based on content height */
+        padding: 20px 0; /* Add padding when open */
+      }
+      nav a {
+        margin: 10px 20px; /* Vertical spacing and left alignment for links */
+        font-size: 1.1em;
+        text-align: left;
+        width: auto; /* Allow links to naturally size */
+        padding-bottom: 5px; /* Adjust padding for mobile underline */
+      }
+      nav a::after {
+        height: 1.5px; /* Thinner underline for mobile */
+      }
+	  section h2 {
+	padding-bottom: 8px;
+
+      }
+
+      section h2::after {
+
+        height: 2px;
+
+      }
+
+
+
+      /* Recent Activity Mobile Responsiveness - Updated */
+
+     
+      /* footer {
+        flex-direction: column;
+      } */
+      /* Recent Activity Mobile Responsiveness */
+      .recent-activity-item {
+        flex-direction: column !important; /* Stack image and text vertically */
+        text-align: left; /* Center text */
+        margin-bottom: 30px; /* Consistent spacing between items */
+        padding: 0;  /* Add horizontal padding within the item */
+        gap: 20px; /* Keep gap for vertical spacing between image and text */
+      }
+      .recent-activity-item img {
+        width: 100%; /* Make image a bit smaller than 100% to allow padding */
+        max-width: none; /* Slightly increased max-width for images */
+        height: auto; /* Maintain aspect ratio */
+        margin-bottom: 0; /* Gap handles spacing, so remove explicit margin-bottom here */
+      }
+      .recent-activity-item div {
+        width: 100%; /* Ensure text content takes full available width */
+        padding: 0;  /* Add some padding to text content */
+      }
+      .recent-activity-item h3 {
+        font-size: 1.3em; /* Slightly smaller font for mobile headers */
+        margin-bottom: 10px;
+		margin-top:0;
+      }
+      .recent-activity-item p {
+        font-size: 0.95em; /* Slightly smaller font for mobile paragraphs */
+      }
+      /* End Recent Activity Mobile Responsiveness */
+      .vmv-cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 15px;
+      }
+      .vmv-card {
+        padding: 20px;
+      }
+      .vmv-icon {
+        font-size: 2.5em;
+      }
+  footer {
+        flex-direction: column;
+      }
+      /* Footer Mobile Responsiveness */
+      .footer-content-wrapper {
+        flex-direction: column;
+        padding: 20px; /* Adjust padding for mobile footer content */
+      }
+      .footer-left,
+      .footer-right {
+        min-width: unset; /* Remove min-width on mobile */
+        width: 100%; /* Take full width on mobile */
+        text-align: center; /* Center content on mobile */
+      }
+      .footer-left {
+        margin-bottom: 20px; /* Add spacing between left and right on mobile */
+      }
+    }
+    /* End zigzag styles */
+
+   
+    footer {
+      background: #399b8c;
+      color: white;
+      padding: 0; /* Remove padding from footer itself, it will be on the wrapper */
+    }
+    .footer-content-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 80%; /* Align with main content sections */
+      margin: 0 auto; /* Center the content */
+      box-sizing: border-box; /* Include padding in the width calculation */
+    }
+    .footer-left {
+      flex: 1;
+      min-width: 250px;
+    }
+	.footer-right {
+      
+      width: 350px;
+    }
+    .footer-right form {
+      display: flex;
+      flex-direction: column;
+    }
+    .footer-right input, .footer-right textarea {
+      margin: 8px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    .footer-right button {
+      padding: 10px;
+      background: #ffd700;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    
+    .footer-right button:hover {
+      background: #f1c40f;
+      cursor: pointer;
+    }
+
+    /* Document Display Styles */
+    .document-display {
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+    .document-display h2 {
+      margin-left: 20px;
+    }
+    .document-cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+        gap: 20px;
+        padding: 20px;
+        max-width: 98%;
+      }
+
+    @media (max-width: 992px) {
+        .document-cards {
+            grid-template-columns: repeat(2, 1fr); /* 2 cards per row on medium screens */
+        }
+        .document-cards > *:nth-child(2n+3):last-child {
+            grid-column: 1 / 3; /* Center last item if only one in a row of 2 */
+            justify-self: center;
+        }
+        .strategy-cards-container {
+          grid-template-columns: repeat(2, 1fr); /* Two columns on medium screens */
+          padding: 0 15px;
+        }
+    }
+
+    .document-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        text-decoration: none;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        padding-bottom: 15px;
+        width: 100%; /* Ensure card takes full width of its grid cell */
+    }
+
+    .document-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .document-card img {
+        width: 100%;
+        max-width: 100%; /* Ensure image does not exceed container width */
+        height: 250px; /* Adjust as needed */
+        object-fit: cover;
+        border-bottom: 1px solid #eee;
+    }
+
+    .document-card h3 {
+        margin-top: 15px;
+        font-size: 1.2em;
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    @media (max-width: 768px) {
+        .document-cards {
+            grid-template-columns: 1fr;
+            padding: 10px;
+        }
+        .document-card img {
+            height: 200px;
+        }
+        .our-strategies {
+          padding: 60px 15px;
+        }
+        .our-strategies .section-title {
+          font-size: 2em;
+          margin-bottom: 30px;
+        }
+        .strategy-cards-container {
+          grid-template-columns: 1fr; /* Single column on small screens */
+          gap: 25px;
+          padding: 0;
+        }
+        .strategy-card img {
+          height: 180px;
+        }
+        .strategy-card .card-content {
+          padding: 15px;
+        }
+    }
+  /* Modal Styles */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 10000; /* Sit on top */
+        padding-top: 50px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        position: relative; /* For close button positioning */
+    }
+
+    .modal-content img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    /* Media queries for responsive modal */
+    @media only screen and (max-width: 700px){
+        .modal-content { 
+            width: 100%;
+        }
+    }
+
